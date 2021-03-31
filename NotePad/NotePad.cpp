@@ -146,12 +146,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         toolBar.create();
 
         RECT recMainWindow;
-        GetWindowRect(hWnd, &recMainWindow);
+        //GetWindowRect(hWnd, &recMainWindow);
+        GetClientRect(hWnd, &recMainWindow);
         int winMainWidth = recMainWindow.right - recMainWindow.left;
-        int winMainHeight = recMainWindow.bottom - recMainWindow.top -63;
+        int winMainHeight = recMainWindow.bottom - recMainWindow.top;// -63;
         
 
-        pathEdit.move(1, 1+44, winMainWidth * 0.7 - 18, 30);
+        pathEdit.move(1, 1+44, winMainWidth * 0.7, 30);
         buttonOpen.move(pathEdit.getRect().right + 1, 1 + 44, winMainWidth * 0.1, 30);
         buttonSave.move(buttonOpen.getRect().right + 1, 1 + 44, winMainWidth * 0.1, 30);
         buttonSaveAs.move(buttonSave.getRect().right + 1, 1 + 44, winMainWidth * 0.1, 30);
@@ -181,11 +182,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         pathEdit.recalculateWidthWithFix();
         buttonOpen.recalculateWidthWithFix();
         buttonSave.recalculateWidthWithFix();
+
+        
+
+        
+
         buttonSaveAs.recalculateWidthWithFix();
+
         toolBar.recalculateWidthWithFix();
         
         int winMainWidth = LOWORD(lParam);
         int winMainHeight = HIWORD(lParam);
+        buttonSaveAs.move(buttonSave.getRect().right + 1, 1 + 44, winMainWidth - buttonSave.getRect().right - 1, 30);
         mainEdit.move(1, 75, winMainWidth-1, winMainHeight - 75);
     }
     break;
