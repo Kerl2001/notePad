@@ -1,7 +1,18 @@
 #include "MainFuncs.h"
 
 void openFileAndPastInEdit(FileManager& file, Edit& edit) {
-	if (!file.OpenFileWithManager())	return;;
+	if (!file.OpenFileWithManager())	return;
+	TCHAR tBuf[1024];
+	if (!file.ReadFileWithManager(tBuf, _tcslen(tBuf))) {
+		file.CloseFileWithManager();
+		return;
+	}
+	edit.setText(tBuf);
+	file.CloseFileWithManager();
+}
+
+void openFileAndPastInEditWithoutChoice(FileManager& file, Edit& edit, LPWSTR filename) {
+	file.OpenFileWithoutChoice(filename);
 	TCHAR tBuf[1024];
 	if (!file.ReadFileWithManager(tBuf, _tcslen(tBuf))) {
 		file.CloseFileWithManager();
@@ -37,7 +48,9 @@ void saveFile(FileManager& file, Edit& edit) {
 }
 
 void newFile(FileManager& file, Edit& edit) {
-	if (file.SaveFileAsWithManager())	return;
+	if (!file.SaveFileAsWithManager())	return;
 	file.OpenFileWithoutChoice();
 	file.CloseFileWithManager();
+	TCHAR tBuf[1024] = L"";
+	edit.setText(tBuf);
 }

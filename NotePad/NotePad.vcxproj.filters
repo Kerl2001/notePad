@@ -48,6 +48,9 @@
     <ClInclude Include="MainFuncs.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="RegEdit.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NotePad.cpp">
@@ -72,6 +75,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="MainFuncs.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="RegEdit.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

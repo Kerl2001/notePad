@@ -18,7 +18,9 @@ public:
 	BOOL CloseFileWithManager();
 	BOOL SaveFileAsWithManager();
 	BOOL SaveFileWithManager();
-	BOOL OpenFileWithoutChoice();
+	BOOL OpenFileWithoutChoice(LPWSTR filename = NULL);
+	//BOOL OpenExistingFileWithoutChoice();
+
 
 	inline TCHAR* getCurrentFileName() {
 		return _currentFileName;

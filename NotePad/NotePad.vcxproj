@@ -149,6 +149,7 @@
     <ClInclude Include="MyMenu.h" />
     <ClInclude Include="MyWindow.h" />
     <ClInclude Include="NotePad.h" />
+    <ClInclude Include="RegEdit.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ToolBar.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="MyMenu.cpp" />
     <ClCompile Include="MyWindow.cpp" />
     <ClCompile Include="NotePad.cpp" />
+    <ClCompile Include="RegEdit.cpp" />
     <ClCompile Include="ToolBar.cpp" />
   </ItemGroup>
   <ItemGroup>

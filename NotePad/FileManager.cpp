@@ -35,11 +35,30 @@ BOOL FileManager::SaveFileAsWithManager() {
     }
     if (GetSaveFileName(&_ofn)) {
 
+        
         int sizeFileName = _tcslen(_ofn.lpstrFile);
-        _ofn.lpstrFile[sizeFileName] = L'.';
-        _ofn.lpstrFile[++sizeFileName] = L't';
-        _ofn.lpstrFile[++sizeFileName] = L'x';
-        _ofn.lpstrFile[++sizeFileName] = L't';
+        if (sizeFileName > 4) {
+            if (_ofn.lpstrFile[sizeFileName - 1] != L't' &&
+            _ofn.lpstrFile[sizeFileName - 2] != L'x' &&
+            _ofn.lpstrFile[sizeFileName - 3] != L't' &&
+            _ofn.lpstrFile[sizeFileName - 4] != L'.') {
+
+                _ofn.lpstrFile[sizeFileName] = L'.';
+                _ofn.lpstrFile[++sizeFileName] = L't';
+                _ofn.lpstrFile[++sizeFileName] = L'x';
+                _ofn.lpstrFile[++sizeFileName] = L't';
+                _ofn.lpstrFile[++sizeFileName] = 0;
+
+            }
+        }
+        else {
+            _ofn.lpstrFile[sizeFileName] = L'.';
+            _ofn.lpstrFile[++sizeFileName] = L't';
+            _ofn.lpstrFile[++sizeFileName] = L'x';
+            _ofn.lpstrFile[++sizeFileName] = L't';
+            _ofn.lpstrFile[++sizeFileName] = 0;
+         }
+        
         
         _hf = CreateFile(_ofn.lpstrFile, GENERIC_READ | GENERIC_WRITE,
             0, NULL,
@@ -51,7 +70,13 @@ BOOL FileManager::SaveFileAsWithManager() {
     return FALSE;
 }
 
-BOOL FileManager::OpenFileWithoutChoice() {
+BOOL FileManager::OpenFileWithoutChoice(LPWSTR filename) {
+    if (filename == NULL) {
+        filename = _ofn.lpstrFile;
+    }
+    else {
+        _ofn.lpstrFile = filename;
+    }
     _hf = CreateFile(_ofn.lpstrFile, GENERIC_READ | GENERIC_WRITE,
         0, NULL,
         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
@@ -59,6 +84,8 @@ BOOL FileManager::OpenFileWithoutChoice() {
     _currentFileName = _ofn.lpstrFile;
     return TRUE;
 }
+
+
 
 BOOL FileManager::OpenFileWithManager() {
     if (_hf != NULL) {

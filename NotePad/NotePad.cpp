@@ -12,6 +12,8 @@ HINSTANCE hInst;                                // текущий экземпл
 WCHAR szTitle[MAX_LOADSTRING];                  // Текст строки заголовка
 WCHAR szWindowClass[MAX_LOADSTRING];            // имя класса главного окна
 
+PWCHAR RegKeyName = (PWCHAR)L"MyNotepad";
+
 // Отправить объявления функций, включенных в этот модуль кода:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -134,6 +136,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     static Edit pathEdit(NULL, WS_CHILD | WS_BORDER | WS_VISIBLE | ES_READONLY, 0, 0, 0, 0, hWnd, (HMENU)312, hInst);
     static ToolBar toolBar(NULL, WS_VISIBLE | WS_CHILD | TBSTYLE_WRAPABLE, 0, 0, 0, 0, hWnd, (HMENU)317, hInst);
     static Menu menu(hWnd);
+    static bool firstWMSize = true;
     switch (message)
     {
     case WM_CREATE:
@@ -168,6 +171,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
         menu.create();
+
+        RECT mainWindowRect;
+        RegEdit::readDwordValueRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"top", (DWORD*)&mainWindowRect.top);
+        RegEdit::readDwordValueRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"left", (DWORD*)&mainWindowRect.left);
+        RegEdit::readDwordValueRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"right", (DWORD*)&mainWindowRect.right);
+        RegEdit::readDwordValueRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"bottom", (DWORD*)&mainWindowRect.bottom);
+
+        PWCHAR filename = nullptr;
+        RegEdit::readUserInfoFromRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"Lastfile", &filename);
+
+        MoveWindow(hWnd, mainWindowRect.left, mainWindowRect.top, mainWindowRect.right - mainWindowRect.left, mainWindowRect.bottom - mainWindowRect.top, FALSE);
+        openFileAndPastInEditWithoutChoice(file, mainEdit, filename);
+        pathEdit.setText(file.getCurrentFileName());
+
+
     }
     break;
     case WM_GETMINMAXINFO:
@@ -179,13 +197,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     break;
     case WM_SIZE:
     {
+        
         pathEdit.recalculateWidthWithFix();
         buttonOpen.recalculateWidthWithFix();
         buttonSave.recalculateWidthWithFix();
-
-        
-
-        
 
         buttonSaveAs.recalculateWidthWithFix();
 
@@ -195,6 +210,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         int winMainHeight = HIWORD(lParam);
         buttonSaveAs.move(buttonSave.getRect().right + 1, 1 + 44, winMainWidth - buttonSave.getRect().right - 1, 30);
         mainEdit.move(1, 75, winMainWidth-1, winMainHeight - 75);
+        
+
     }
     break;
     case WM_COMMAND:
@@ -247,6 +264,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
+
+        RECT recMainWindow;
+        GetWindowRect(hWnd, &recMainWindow);
+        
+        RegEdit::CreateRegistryKey(HKEY_CURRENT_USER, RegKeyName);
+        RegEdit::WriteDwordInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"top", recMainWindow.top);
+        RegEdit::WriteDwordInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"left", recMainWindow.left);
+        RegEdit::WriteDwordInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"right", recMainWindow.right);
+        RegEdit::WriteDwordInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"bottom", recMainWindow.bottom);
+
+        TCHAR fileName[256];
+        pathEdit.getText(fileName);
+        RegEdit::writeStringInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"Lastfile", fileName);
+
+
         PostQuitMessage(0);
         break;
     default:
