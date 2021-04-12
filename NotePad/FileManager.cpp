@@ -38,9 +38,9 @@ BOOL FileManager::SaveFileAsWithManager() {
         
         int sizeFileName = _tcslen(_ofn.lpstrFile);
         if (sizeFileName > 4) {
-            if (_ofn.lpstrFile[sizeFileName - 1] != L't' &&
-            _ofn.lpstrFile[sizeFileName - 2] != L'x' &&
-            _ofn.lpstrFile[sizeFileName - 3] != L't' &&
+            if (_ofn.lpstrFile[sizeFileName - 1] != L't' ||
+            _ofn.lpstrFile[sizeFileName - 2] != L'x' ||
+            _ofn.lpstrFile[sizeFileName - 3] != L't' ||
             _ofn.lpstrFile[sizeFileName - 4] != L'.') {
 
                 _ofn.lpstrFile[sizeFileName] = L'.';

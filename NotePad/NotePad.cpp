@@ -244,6 +244,31 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 pathEdit.setText(file.getCurrentFileName());
             }
             break;
+            case CM_DESTROY:
+            {
+                SendMessage(hWnd, WM_DESTROY, 0, 0);
+            }
+            break;
+            case CM_INFO:
+            {
+                SendMessage(hWnd, IDM_ABOUT, 0, 0);
+            }
+            break;
+            case CM_COPY:
+            {
+                SendMessage(mainEdit.getHWND(), WM_COPY, 0, 0);
+            }
+            break;
+            case CM_CUT:
+            {
+                SendMessage(mainEdit.getHWND(), WM_CUT, 0, 0);
+            }
+            break;
+            case CM_PASTE:
+            {
+                SendMessage(mainEdit.getHWND(), WM_PASTE, 0, 0);
+            }
+            break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;
@@ -264,6 +289,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
+    {
 
         RECT recMainWindow;
         GetWindowRect(hWnd, &recMainWindow);
@@ -280,6 +306,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
         PostQuitMessage(0);
+    }
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

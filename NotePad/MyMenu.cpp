@@ -23,7 +23,7 @@ void Menu::create() {
     int i = 0;
     CreateMenuItem(_hFileMenu, (LPWSTR)L"&Oкрыть файл\t Ctrl+O", i++, CM_OPEN, NULL, FALSE, MFT_STRING);
     CreateMenuItem(_hFileMenu, (LPWSTR)L"&Сохранить файл\t Ctrl+S", i++, CM_SAVE, NULL, FALSE, MFT_STRING);
-    CreateMenuItem(_hFileMenu, (LPWSTR)L"&Сохранить файл как", i++, CM_SAVE_AS, NULL, FALSE, MFT_STRING);
+    CreateMenuItem(_hFileMenu, (LPWSTR)L"Сохранить файл как\t Ctrl+Shift+S", i++, CM_SAVE_AS, NULL, FALSE, MFT_STRING);
     CreateMenuItem(_hFileMenu, NULL, i++, 0, NULL, FALSE, MFT_SEPARATOR);
     CreateMenuItem(_hFileMenu, (LPWSTR)L"&Выход\t Alt+F4", i++, 1004, NULL, FALSE, MFT_STRING);
 

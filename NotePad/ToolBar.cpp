@@ -55,12 +55,12 @@ void ToolBar::setButtons() {
         { MAKELONG(STD_FILEOPEN, ImageListID), CM_OPEN, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Open"},
         { MAKELONG(STD_FILESAVE, ImageListID), CM_SAVE, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Save"},
         { MAKELONG(STD_FILESAVE, ImageListID), CM_SAVE_AS, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Save As..." },
-        { MAKELONG(STD_DELETE, ImageListID), 125, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Quit" },
-        { MAKELONG(STD_COPY, ImageListID), 126, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Copy" },
-        { MAKELONG(STD_CUT, ImageListID), 127, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Cut" },
-        { MAKELONG(STD_PASTE, ImageListID), 128, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Paste" },
-        { MAKELONG(STD_UNDO, ImageListID), 124, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Undo" },
-        { MAKELONG(STD_HELP, ImageListID), 124, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Info" },
+        { MAKELONG(STD_DELETE, ImageListID), CM_DESTROY, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Quit" },
+        { MAKELONG(STD_COPY, ImageListID), CM_COPY, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Copy" },
+        { MAKELONG(STD_CUT, ImageListID), CM_CUT, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Cut" },
+        { MAKELONG(STD_PASTE, ImageListID), CM_PASTE, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Paste" },
+        { MAKELONG(STD_UNDO, ImageListID), CM_UNDO, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Undo" },
+        { MAKELONG(STD_HELP, ImageListID), CM_INFO, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Info" },
     };
 
     // Add buttons.
