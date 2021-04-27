@@ -1,21 +1,8 @@
-﻿  Edit.cpp
-  FileManager.cpp
-  MainFuncs.cpp
-  MyButton.cpp
-  MyMenu.cpp
-  MyWindow.cpp
-C:\work\C++\NotePad\NotePad\MyWindow.cpp(36,21): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\MyWindow.cpp(37,19): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\MyWindow.cpp(38,23): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\MyWindow.cpp(39,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\MyWindow.cpp(50,21): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\MyWindow.cpp(51,23): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+﻿  MainFuncs.cpp
   NotePad.cpp
-C:\work\C++\NotePad\NotePad\NotePad.cpp(158,45): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\NotePad.cpp(159,76): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\NotePad.cpp(160,78): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\NotePad.cpp(161,80): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-  RegEdit.cpp
-  ToolBar.cpp
+C:\work\C++\NotePad\NotePad\NotePad.cpp(160,45): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\work\C++\NotePad\NotePad\NotePad.cpp(161,76): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\work\C++\NotePad\NotePad\NotePad.cpp(162,78): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\work\C++\NotePad\NotePad\NotePad.cpp(163,80): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
   Создание кода...
   NotePad.vcxproj -> C:\work\C++\NotePad\Debug\NotePad.exe

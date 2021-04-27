@@ -12,6 +12,8 @@ HINSTANCE hInst;                                // текущий экземпл
 WCHAR szTitle[MAX_LOADSTRING];                  // Текст строки заголовка
 WCHAR szWindowClass[MAX_LOADSTRING];            // имя класса главного окна
 
+HWND GLOB_HWND;
+
 PWCHAR RegKeyName = (PWCHAR)L"MyNotepad";
 
 // Отправить объявления функций, включенных в этот модуль кода:
@@ -48,7 +50,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Цикл основного сообщения:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (!TranslateAccelerator(GLOB_HWND, hAccelTable, &msg))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
@@ -102,16 +104,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    
    InitCommonControls();
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   GLOB_HWND = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
+   if (!GLOB_HWND)
    {
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(GLOB_HWND, nCmdShow);
+   UpdateWindow(GLOB_HWND);
 
    return TRUE;
 }
@@ -227,8 +229,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
             case CM_SAVE:
             {
-                saveFile(file, mainEdit);
-                
+                saveFile(file, mainEdit); 
             }
 
             break;
@@ -249,11 +250,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 SendMessage(hWnd, WM_DESTROY, 0, 0);
             }
             break;
-            case CM_INFO:
-            {
-                SendMessage(hWnd, IDM_ABOUT, 0, 0);
-            }
-            break;
             case CM_COPY:
             {
                 SendMessage(mainEdit.getHWND(), WM_COPY, 0, 0);
@@ -267,6 +263,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case CM_PASTE:
             {
                 SendMessage(mainEdit.getHWND(), WM_PASTE, 0, 0);
+            }
+            break;
+            case CM_UNDO:
+            {
+                SendMessage(mainEdit.getHWND(), WM_UNDO, 0, 0);
             }
             break;
             case IDM_ABOUT:
@@ -288,9 +289,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+    case WM_CLOSE:
+    {
+       /* auto response = MessageBox(hWnd, L"Really quit?", L"My application", MB_OKCANCEL);
+        if (response == IDOK)
+        {
+            DestroyWindow(hWnd);
+        }*/
+        auto quit = DialogBox(hInst,
+            MAKEINTRESOURCE(IDD_DIALOG1),
+            hWnd, (DLGPROC)QuitProc);
+
+        if (quit == CM_EXIT_WITH_SAVE) {
+            saveFile(file, mainEdit);
+            DestroyWindow(hWnd);
+        }
+        else if (quit == CM_EXIT_WITHOUT_SAVE) {
+            DestroyWindow(hWnd);
+        }
+    }
+    break;
     case WM_DESTROY:
     {
-
         RECT recMainWindow;
         GetWindowRect(hWnd, &recMainWindow);
         
@@ -304,8 +324,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         pathEdit.getText(fileName);
         RegEdit::writeStringInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"Lastfile", fileName);
 
-
         PostQuitMessage(0);
+       
     }
         break;
     default:

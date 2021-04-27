@@ -54,3 +54,25 @@ void newFile(FileManager& file, Edit& edit) {
 	TCHAR tBuf[1024] = L"";
 	edit.setText(tBuf);
 }
+
+
+BOOL CALLBACK QuitProc(HWND hwndDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case CM_EXIT_WITHOUT_SAVE:
+			EndDialog(hwndDlg, wParam);
+			return CM_EXIT_WITHOUT_SAVE;
+		case CM_EXIT_WITH_SAVE:
+			EndDialog(hwndDlg, wParam);
+			return CM_EXIT_WITH_SAVE;
+		case IDCANCEL:
+			EndDialog(hwndDlg, wParam);
+			return IDCANCEL;
+		}
+	}
+	return FALSE;
+}

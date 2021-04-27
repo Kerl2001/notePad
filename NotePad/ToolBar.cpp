@@ -60,7 +60,7 @@ void ToolBar::setButtons() {
         { MAKELONG(STD_CUT, ImageListID), CM_CUT, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Cut" },
         { MAKELONG(STD_PASTE, ImageListID), CM_PASTE, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Paste" },
         { MAKELONG(STD_UNDO, ImageListID), CM_UNDO, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Undo" },
-        { MAKELONG(STD_HELP, ImageListID), CM_INFO, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Info" },
+        { MAKELONG(STD_HELP, ImageListID), 104, TBSTATE_ENABLED, buttonStyles, {0}, 0, (INT_PTR)L"Info" },
     };
 
     // Add buttons.
