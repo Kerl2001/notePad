@@ -23,7 +23,7 @@ void openFileAndPastInEditWithoutChoice(FileManager& file, Edit& edit, LPWSTR fi
 }
 
 void saveFileAs(FileManager& file, Edit& edit) {
-	if (file.SaveFileAsWithManager())	return;
+	if (!file.SaveFileAsWithManager())	return;
 	TCHAR tBuf[1000];
 	edit.getText(tBuf);
 	size_t size = _tcslen(tBuf);
@@ -48,11 +48,12 @@ void saveFile(FileManager& file, Edit& edit) {
 }
 
 void newFile(FileManager& file, Edit& edit) {
-	if (!file.SaveFileAsWithManager())	return;
+	//if (!file.SaveFileAsWithManager())	return;
 	file.OpenFileWithoutChoice();
 	file.CloseFileWithManager();
 	TCHAR tBuf[1024] = L"";
 	edit.setText(tBuf);
+	file.clearFileName();
 }
 
 

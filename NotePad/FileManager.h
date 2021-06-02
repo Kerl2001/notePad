@@ -12,6 +12,7 @@ private:
 public:
 	FileManager(HWND);
 	
+	inline void clearFileName() { _currentFileName = NULL; }
 	BOOL OpenFileWithManager();
 	BOOL ReadFileWithManager(TCHAR* buf, int size);
 	BOOL WriteFileWithManager(TCHAR* buf, int size);

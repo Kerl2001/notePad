@@ -1,8 +1,2 @@
 ﻿  MainFuncs.cpp
-  NotePad.cpp
-C:\work\C++\NotePad\NotePad\NotePad.cpp(160,45): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\NotePad.cpp(161,76): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\NotePad.cpp(162,78): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\work\C++\NotePad\NotePad\NotePad.cpp(163,80): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-  Создание кода...
   NotePad.vcxproj -> C:\work\C++\NotePad\Debug\NotePad.exe

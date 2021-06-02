@@ -242,7 +242,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case CM_NEW:
             {
                 newFile(file, mainEdit);
-                pathEdit.setText(file.getCurrentFileName());
+                pathEdit.setText((TCHAR*)L"new file");
             }
             break;
             case CM_DESTROY:
@@ -320,9 +320,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         RegEdit::WriteDwordInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"right", recMainWindow.right);
         RegEdit::WriteDwordInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"bottom", recMainWindow.bottom);
 
-        TCHAR fileName[256];
-        pathEdit.getText(fileName);
-        RegEdit::writeStringInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"Lastfile", fileName);
+        //TCHAR fileName[256];
+        //pathEdit.getText(fileName);
+        RegEdit::writeStringInRegistry(HKEY_CURRENT_USER, RegKeyName, (PWCHAR)L"Lastfile", file.getCurrentFileName());
 
         PostQuitMessage(0);
        
